@@ -2,3 +2,4 @@ myenv
 .env
 test.ipynb
 main.py
+.DS_Store
