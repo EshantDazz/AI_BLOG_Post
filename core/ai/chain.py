@@ -66,13 +66,14 @@ async def return_no_plagiarism_content(
     keywords,
     lsi_keywords,
     content,
+    product,
     max_retries: int = 10,
 ):
     """Return a list of string about all the technical skills mentioned in the cv"""
     try:
         llms = llm.with_structured_output(schema=AI_Blog)
         chain=plagiarism_prompt|llms
-        input_data: Dict[str, str] = {"keywords":keywords,"lsi_keywords":lsi_keywords,"content":content}
+        input_data: Dict[str, str] = {"keywords":keywords,"lsi_keywords":lsi_keywords,"content":content,"product":product}
         result: str | Dict[str, str] = await _run_chain(chain=chain, input_data=input_data, max_retries=max_retries)
         return result.content
 

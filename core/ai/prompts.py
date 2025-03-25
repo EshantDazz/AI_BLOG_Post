@@ -66,6 +66,13 @@ The reason I am telling you to write everything without missing any context is t
 everything in the most different way possible with the same context and please avoid any plagiarism 
 Your only goal is to write the context in a unqie way so that plagiarism doesnt come up
 
+                                                   
+
+Also I will give your the product content
+<product> {product} </product>  
+
+Here is the product content now what you need to do is that dont make the blog post too generic. Make it in a way what the customer is selling which you will get in the product content.
+But at the end of the day main role is to avoid plagriarism.                                                                                                                                                                                                          
 Here is your whole blog content which you need to re write avoding plagiarism
 <blog content> {content} </blog content>                                                                                                                                                  
 Return in the following format
