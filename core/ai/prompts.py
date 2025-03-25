@@ -54,3 +54,20 @@ ai_blog_prompt = ChatPromptTemplate.from_messages(
         ("user", user_prompt),
     ]
 )
+
+
+
+plagiarism_prompt=ChatPromptTemplate.from_template("""
+I will be giving you alot of context related to AI Blog Post. Write everything without missing the the
+keywords : <keywords> {keywords} </keywords>
+lsi keywords : <lsi_keywords> {lsi_keywords} </lsi_keywords>
+
+The reason I am telling you to write everything without missing any context is that so that we can avoid plagiarism. Write
+everything in the most different way possible with the same context and please avoid any plagiarism 
+Your only goal is to write the context in a unqie way so that plagiarism doesnt come up
+
+Here is your whole blog content which you need to re write avoding plagiarism
+<blog content> {content} </blog content>                                                                                                                                                  
+Return in the following format
+content=                                                                                                                                                                                                                                                                                                                                                                                                     
+""")

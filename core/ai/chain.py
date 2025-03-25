@@ -5,7 +5,7 @@ import logging
 import asyncio
 from langchain_openai import ChatOpenAI
 from langchain_core.runnables.base import RunnableSerializable
-from core.ai.prompts import ai_blog_prompt
+from core.ai.prompts import ai_blog_prompt,plagiarism_prompt
 
 load_dotenv()
 
@@ -55,8 +55,27 @@ async def return_ai_blog_content(
         chain=ai_blog_prompt|llms
         input_data: Dict[str, str] = {"topic":topic,"keywords":keywords,"LSI_keywords":lsi_keywords,"content_angle":content_angle,"density":density,"product":product}
         result: str | Dict[str, str] = await _run_chain(chain=chain, input_data=input_data, max_retries=max_retries)
-        return result
+        return result.content
 
     except Exception as e:
         logging.error(f"Unexpected error in generate_follow_up_question: {e}")
         return "An unexpected error occured"
+    
+
+async def return_no_plagiarism_content(
+    keywords,
+    lsi_keywords,
+    content,
+    max_retries: int = 10,
+):
+    """Return a list of string about all the technical skills mentioned in the cv"""
+    try:
+        llms = llm.with_structured_output(schema=AI_Blog)
+        chain=plagiarism_prompt|llms
+        input_data: Dict[str, str] = {"keywords":keywords,"lsi_keywords":lsi_keywords,"content":content}
+        result: str | Dict[str, str] = await _run_chain(chain=chain, input_data=input_data, max_retries=max_retries)
+        return result.content
+
+    except Exception as e:
+        logging.error(f"Unexpected error in generate_follow_up_question: {e}")
+        return "An unexpected error occured"    
